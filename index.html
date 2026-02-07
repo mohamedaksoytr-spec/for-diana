@@ -1,0 +1,1049 @@
+<html>
+        <head><title>Downloaded HTML</title></head>
+        <body>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohamed’s Beautiful Poetry — For Diana</title>
+    <meta name="description" content="Mohamed’s beautiful poetry to Diana." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-1: #f9f7f4; /* soft sky white */
+        --card: rgba(255, 255, 255, 0.92);
+        --stroke: rgba(179, 58, 58, 0.18);
+
+        --text: #6b1e1e; /* dark rose red */
+        --muted: #9b4a4a; /* lighter rose */
+
+        --accent: #b33a3a; /* deep rose */
+        --accent-2: #e6a3a3; /* soft blush */
+
+        --shadow: 0 18px 60px rgba(40, 10, 10, 0.14);
+        --radius: 22px;
+        --sidebar-w: 290px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg-1);
+        overflow: hidden; /* scroll inside main */
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Particles canvas */
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.55;
+      }
+
+      /* Layout */
+      .app {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: var(--sidebar-w) 1fr;
+        height: 100vh;
+      }
+
+      /* Sidebar */
+      aside {
+        border-right: 1px solid rgba(179, 58, 58, 0.14);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(248, 242, 242, 0.9)
+        );
+        backdrop-filter: blur(10px);
+        padding: 18px 14px;
+        overflow: hidden;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 12px 10px;
+        border: 1px solid rgba(179, 58, 58, 0.14);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 10px 28px rgba(40, 10, 10, 0.08);
+      }
+
+      .brand .script {
+        font-family: "Sacramento", cursive;
+        font-size: 32px;
+        line-height: 1;
+        color: var(--text);
+      }
+
+      .brand .sub {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        padding: 10px 12px 2px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        appearance: none;
+        border: 1px solid rgba(179, 58, 58, 0.16);
+        background: rgba(179, 58, 58, 0.08);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: transform 0.15s ease, background 0.15s ease,
+          border-color 0.15s ease;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: rgba(179, 58, 58, 0.12);
+        border-color: rgba(179, 58, 58, 0.24);
+      }
+
+      .pill {
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid rgba(179, 58, 58, 0.14);
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .toc {
+        margin-top: 12px;
+        height: calc(100vh - 180px);
+        overflow: auto;
+        padding-right: 6px;
+      }
+
+      .toc::-webkit-scrollbar {
+        width: 8px;
+      }
+      .toc::-webkit-scrollbar-thumb {
+        background: rgba(179, 58, 58, 0.14);
+        border-radius: 999px;
+      }
+
+      .toc a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 14px;
+        text-decoration: none;
+        color: rgba(107, 30, 30, 0.92);
+        border: 1px solid transparent;
+        transition: background 0.15s ease, border-color 0.15s ease;
+        margin: 8px 0;
+        background: rgba(255, 255, 255, 0.65);
+      }
+
+      .toc a:hover {
+        background: rgba(179, 58, 58, 0.08);
+        border-color: rgba(179, 58, 58, 0.16);
+      }
+
+      .toc a.active {
+        background: rgba(179, 58, 58, 0.12);
+        border-color: rgba(179, 58, 58, 0.22);
+      }
+
+      .toc .small {
+        display: block;
+        font-size: 12px;
+        color: rgba(155, 74, 74, 0.82);
+        margin-top: 3px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      /* Main scroll area */
+      main {
+        height: 100vh;
+        overflow: auto;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        padding: 18px 18px 34px;
+      }
+
+      main::-webkit-scrollbar {
+        width: 10px;
+      }
+      main::-webkit-scrollbar-thumb {
+        background: rgba(179, 58, 58, 0.14);
+        border-radius: 999px;
+      }
+
+      .page {
+        min-height: calc(100vh - 36px);
+        scroll-snap-align: start;
+        display: grid;
+        place-items: center;
+        padding: 20px 10px;
+      }
+
+      .card {
+        width: min(860px, 100%);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.92),
+          rgba(255, 255, 255, 0.86)
+        );
+        border: 1px solid rgba(179, 58, 58, 0.18);
+        box-shadow: var(--shadow);
+        padding: 26px 22px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(
+            circle at 25% 25%,
+            rgba(179, 58, 58, 0.08),
+            transparent 42%
+          ),
+          radial-gradient(
+            circle at 75% 70%,
+            rgba(230, 163, 163, 0.08),
+            transparent 46%
+          );
+        filter: blur(26px);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .card-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .dedication-title {
+        font-family: "Sacramento", cursive;
+        font-size: clamp(44px, 6vw, 66px);
+        line-height: 1;
+        margin: 0;
+        color: var(--text);
+      }
+
+      .dedication-sub {
+        margin: 10px 0 0;
+        color: rgba(107, 30, 30, 0.86);
+        font-size: 16px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+      }
+
+      .spark {
+        display: inline-block;
+        margin: 14px 0 0;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(179, 58, 58, 0.14);
+        background: rgba(179, 58, 58, 0.08);
+        color: rgba(107, 30, 30, 0.9);
+        font-size: 13px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      .poem-title {
+        margin: 0 0 14px;
+        font-size: 24px;
+        font-weight: 600;
+        color: rgba(107, 30, 30, 0.95);
+        letter-spacing: 0.2px;
+      }
+
+      /* Mixed Arabic/English/UA render naturally */
+      .poem-body {
+        margin: 0;
+        white-space: pre-wrap;
+        line-height: 1.85;
+        font-size: 17px;
+        color: rgba(107, 30, 30, 0.9);
+        direction: auto;
+        unicode-bidi: plaintext;
+      }
+
+      .poem-meta {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        color: rgba(155, 74, 74, 0.8);
+        font-size: 12.5px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      footer {
+        position: fixed;
+        left: calc(var(--sidebar-w) + 16px);
+        right: 16px;
+        bottom: 12px;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(179, 58, 58, 0.14);
+        backdrop-filter: blur(10px);
+        color: rgba(155, 74, 74, 0.9);
+        font-size: 12.5px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      .footer-accent {
+        color: rgba(107, 30, 30, 0.95);
+      }
+
+      /* Mobile */
+      .mobile-topbar {
+        display: none;
+      }
+
+      @media (max-width: 860px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+        aside {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: min(92vw, 360px);
+          transform: translateX(-105%);
+          transition: transform 0.2s ease;
+          z-index: 5;
+        }
+        aside.open {
+          transform: translateX(0%);
+        }
+        .mobile-topbar {
+          display: flex;
+          position: fixed;
+          top: 12px;
+          left: 12px;
+          right: 12px;
+          z-index: 6;
+          gap: 10px;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px 12px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.82);
+          border: 1px solid rgba(179, 58, 58, 0.14);
+          backdrop-filter: blur(10px);
+        }
+        main {
+          padding-top: 68px;
+        }
+        footer {
+          left: 12px;
+          right: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="particles"></canvas>
+
+    <!-- Mobile top bar -->
+    <div class="mobile-topbar">
+      <button class="btn" id="openMenuBtn">☰ Poems</button>
+      <button class="btn" id="musicBtnMobile">♪ Music: Off</button>
+    </div>
+
+    <div class="app">
+      <aside id="sidebar">
+        <div class="brand">
+          <div class="script">For Diana</div>
+          <div class="sub">Mohamed’s beautiful poetry — cozy, intimate, and cute.</div>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="musicBtn">♪ Music: Off</button>
+          <span class="pill" id="readingPill">0 / 0</span>
+        </div>
+
+        <nav class="toc" id="toc"></nav>
+      </aside>
+
+      <main id="pages"></main>
+    </div>
+
+    <footer>
+      <div>Made with a warm heart — <span class="footer-accent">Mohamed</span></div>
+      <div id="hint">Tip: scroll like pages ✦</div>
+    </footer>
+
+    <!-- Audio (put your file in the repo at: assets/music.mp3) -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="assets/music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const POEMS = [
+        {
+          title: "Dedication",
+          body: `My Diana,
+
+This little corner of the world is for you.
+A cozy place where every word is a warm blanket,
+where every line is me choosing you again.
+
+— Mohamed`,
+          isDedication: true,
+        },
+
+        {
+          title: "Oases in Your Green Eyes",
+          body: `In English, they say: Wow, I could swim in those green eyes.
+But in Arabic, we say:
+عيناها ليست خضراء وفقط،
+بل واحات حنينٍ ضائعة بين الحلم واليقظة،
+نظرتها تشبه نسمات الفجر حين تلامس قلب الصحراء،
+وفي أعماقها، ترقص الأساطير وتبكي القصائد،
+هي لا تنظر إليك…
+بل تعانق روحك دون أن تلمسك،
+تأخذك من العالم، وتعيدك مختلفاً،
+كأنك ولدت من جديد في حضرة جمالها."`,
+        },
+
+        {
+          title: "Every Road Returns to You",
+          body: `In English we say:
+No matter where I travel, my path always leads back to you.
+
+وفي العربية نقول:
+*يا امرأةً علّمتني أن الحبَّ وطن،
+وأنّ القلب لا يعرف الحدود ولا المسافات.
+
+أرحل من مدينةٍ إلى أخرى،
+من مطارٍ إلى مطار،
+من ضجيج بانكوك إلى صمت المحيط،
+ومن أنوار طوكيو إلى عتمة الليل،
+لكنّ قلبي لا يرحل عنكِ لحظة.
+
+في شوارع تايلاند رأيتُ الزحام،
+لكن لم أرَ سوى فراغكِ في داخلي.
+وفي جزرها رأيتُ البحر،
+لكن الموج كان يكتب اسمكِ على الرمل،
+ويمسحه كأنه يخجل أن يبوح بحبي لكِ أمام الجميع.
+
+وفي اليابان، بين زحام القطار وصوت المطر،
+كنتُ أرى الناس يركضون نحو وجهاتهم،
+وأنا وحدي كنتُ أركض داخلي إليكِ،
+أبحث عن ظلّكِ بين وجوه لا أعرفها،
+وأسمع في قلبي همسكِ أقوى من كل الأصوات.
+
+لكن الغريب أن روحي لا تكتفي بالشرق،
+ولا بالمدن اللامعة،
+إنها تسافر كل ليلة إلى أوكرانيا،
+إلى أراضيكِ المبللة بالندى،
+إلى قُراكِ التي تحفظ براءة عينيكِ،
+إلى الثلج الذي يسقط على نافذتكِ،
+كأنه رسالة مني تقول:
+أنا هنا، وإن غبتُ عنكِ.
+
+أشتاقكِ شوق الأرض إلى المطر،
+شوق الحقول إلى الربيع،
+شوق الطفل إلى صدر أمّه،
+وشوق التائه إلى بيتٍ يعرفهُ من رائحته.
+
+أشتاقكِ حتى لم يعد الشوق كلمة،
+بل صار حياةً كاملة،
+صار دينًا أُصلي فيه باسمكِ،
+وصار قدرًا أقبله بكلّ ما فيه،
+لأنني أعلم أن كل هذا البعد
+ما هو إلّا طريقٌ طويلٌ نحوكِ.
+
+يا ابنة أوكرانيا،
+لو تعلمين كم مرة وقفتُ تحت سماء غريبة،
+وأقسمتُ أن كل الغيم فيها يشبه دمعةً في عيني،
+وأن كل نجمٍ فيها يشبه ابتسامةً من شفتيكِ.
+
+إنني لا أكتب الشعر لكي أمدحكِ،
+بل لأن الشعر يهرب منّي إليكِ،
+ولأن الكلمات تتوسّل أن تُسكب على اسمكِ.
+ولو سكتُّ عنكِ،
+لصرخت روحي حتى أسمعكِ ولو من آخر الدنيا.
+
+أنا لا أبحث عن المدن،
+ولا عن الأوطان،
+أنا أبحث عنكِ أنتِ،
+عن صوتكِ الذي يُعيدني حيًّا،
+عن دفئكِ الذي يُطفئ هذا الغياب،
+عن لقاءٍ لا يُشبه أي لقاء،
+لقاءٍ نغلق فيه كل أبواب العالم،
+ولا يبقى إلّا بابنا نحن.
+
+А українською ми кажемо:
+
+ Ти моя Україна в серці,
+моя земля і мій небосхил.
+Твоє ім’я живе в кожній молитві моїй,
+твоє обличчя, в кожному сні.
+
+Я бачу тебе в кожній дорозі,
+я чую тебе в кожному шумі вітру,
+я знаходжу тебе у власному подиху.
+
+Якщо світ розіб’ється на тисячі уламків,
+я збиратиму їх, щоб створити для тебе новий світ.
+Бо що таке життя без тебе? 
+це ніч без ранку,
+це ріка без берега,
+це серце без крові.
+
+Я клянусь: я повернусь до тебе,
+і тоді ти зрозумієш,
+що всі мої мандрівки були лише шляхом до твого серця.
+
+Ти, моє море,
+мій світанок,
+міоє безсмертя.`,
+        },
+
+        {
+          title: "A Birthday Prayer for My Love",
+          body: `حبيبتي،
+
+إن وصلتكِ كلماتي وأنا نائم، فاعلمي أن النوم غلب جسدي فقط،
+أما قلبي فبقي ساهرًا عند باب يومك،
+يطرق الفجر قبل أن يفتح،
+ليقول لكِ: كل عام وأنتِ الحياة حين تضيق الحياة.
+
+In English we say “I love you,”
+لكن بالعربية نقول:
+أحبكِ حتى تخجل اللغة من وصف ما أشعر،
+وأصمت لأن قلبي قال كل شيء.
+
+اليوم ليس يوم ميلادكِ فقط،
+اليوم وُلدتُ أنا من جديد،
+لأن وجودكِ علّمني أن بعض الأرواح لا تأتي صدفة،
+بل تأتي كقَدَرٍ مكتوبٍ بالحُب.
+
+يا امرأةً إن مرّت على القلب هدأ،
+وإن غابت اضطرب الكون في داخلي،
+أنتِ الدعاء الذي طال انتظاره،
+وأنتِ الإجابة التي جاءت دون سؤال.
+
+قالوا إن الحب وجع،
+وقالوا إن العشق نار،
+لكنهم لم يعرفوا حبكِ،
+فحبكِ سكينة،
+وطن،
+ويدٌ تمسك قلبي كلما خاف.
+
+يا أجمل ما خُلق لي،
+إن سألوني عنكِ قلت:
+هي نبضي إن تعب،
+وروحي إن ضلّت،
+ونوري إن أظلمت أيامي.
+
+أقسم لكِ
+لو قُدِّر لي أن أختار ألف مرة،
+لاخترتكِ في كل مرة،
+وفي كل حياة،
+وفي كل احتمال.
+
+كل عام وأنتِ قصيدتي التي لا تنتهي،
+وكل عام وأنا أحبكِ أكثر مما تسع الكلمات،
+وأقل مما يستحق قلبكِ.
+
+نام جسدي هذه الليلة،
+لكن قلبي بقي معكِ،
+يحرس يومك،
+ويحبكِ…
+كما لم يُحب أحدٌ أحدًا من قبل. 🌙
+
+قالوا: إن العشق ضعف،
+وأقول:
+هو أقوى ما حدث لي،
+لأنكِ جعلتِني أرى نفسي أفضل،
+أهدأ،
+أصدق،
+وأقرب لما يجب أن أكون عليه.
+
+يا امرأةً إن ناديتها باسمي
+شعرتُ أنني أنتمي،
+أنتِ الوطن الذي لا يُغادر،
+والوعد الذي لا يخون،
+والنور الذي لا ينطفئ
+حتى في أقسى ليالي الروح.
+
+لو جمعوا كل الكلمات،
+وكل القصائد،
+وكل الاعترافات الصادقة في التاريخ،
+لما كفت لتشرح لماذا
+أحبكِ بهذا العمق،
+بهذا الثبات،
+بهذا اليقين الذي لا يحتاج برهانًا.
+
+أحبكِ لأنكِ لم تكوني عابرة،
+ولم تكوني سهلة،
+ولم تكوني مؤقتة.
+أحبكِ لأنكِ اخترتِ البقاء
+حين كان الرحيل أسهل،
+واخترتِ قلبي
+حين كان العالم أكثر إغراءً.
+
+كل عام وأنتِ سري الجميل،
+وكل عام وأنتِ المعنى حين يضيع المعنى،
+وكل عام وأنا أحبكِ
+بطريقةٍ لا تشبه أحدًا،
+ولا تُشبه إلا قلبي معكِ.
+
+نام جسدي الليلة،
+لكن روحي بقيت ساهرة
+تعدّ الدقائق حتى يبدأ يومكِ،
+تحرس ابتسامتكِ من الغياب،
+وتهمس لكِ:
+أنتِ لستِ ذكرى في حياتي،
+أنتِ الحياة نفسها
+
+Українською، من قلبي إلى قلبك:
+
+Ти не просто любов у моєму житті.
+Ти мій спокій, коли світ стає важким,
+моя тиша, коли всередині буря,
+і мій дім, навіть коли я далеко.
+
+Я люблю тебе не за щось,
+а попри все.
+Люблю так глибоко,
+що слова здаються замалими,
+а серце єдиною мовою, яка не бреше.
+
+З днем народження, кохана.
+Ти моє завжди. ❤️`,
+        },
+
+        {
+          title: "Our Home, Our Forever",
+          body: `In English we say:
+I miss you and I can’t wait to live together. 
+
+In Arabic: 
+
+حبيبتي،
+أشتاق إليكِ شوق الصحاري للمطر،
+وشوق العصافير لصباحٍ دافئٍ يوقظها من حلمٍ ناعم.
+أشتاق إلى صوتكِ الذي يشبه نغمة عودٍ خجولة،
+وإلى ضحكتكِ التي تمسح عن قلبي تعب الأيام.
+
+أعدّ الساعات بيننا وكأن الزمن طفلٌ عنيد لا يريد أن يكبر،
+وأحادث وحدتي بحكاية عودةٍ قريبة،
+عن شهرٍ يحمل لنا بيتًا واحدًا وسقفًا من أمان،
+وخُطى نخطوها معًا في ممرٍ واحدٍ،
+ونَفَسٍ نتشاركه حين نغلق الباب خلفنا على العالم كله.
+
+يا نور قلبي،
+أتخيلكِ كل صباح تفتحين الستائر،
+ليمتلئ المكان بضحكتكِ،
+ويصبح البيت وطنًا لا جدرانًا
+ومساحتكِ بين ذراعي،
+ووسادتكِ بجانبي،
+وكل ركنٍ يردد اسمكِ كما لو كان صلاة.
+
+لا أستطيع الانتظار حتى يجمعنا قدر واحد إلى الأبد،
+ففي العربية لا نقول فقط “معًا دائمًا”،
+بل نقول: قلبي لكِ ما دام في صدري نبض،
+ونقول: حبّكِ قدرٌ لا يغيّره الزمن،
+ونقسم: سنبقى معًا حتى آخر العمر وما بعد العمر إن كان للحب روحٌ لا تموت.
+
+أحبكِ كما يحب النهر البحر،
+وكما يحب النجم ظلمة الليل،
+وكما تحب الروح جسدها حين تعود إليه بعد غياب.
+وإذا كان الفراق لحظة،
+فإن اللقاء حياة،
+وحياتنا تبدأ حين تدخلين شقتنا القادمة،
+وتجلسين حيث يكون صدري وسادَتكِ الأولى.
+
+اشتياقي لكِ ليس كلامًا،
+إنه وطنٌ لم أسكنه بعد…
+ولكنه ينتظر أن نعيش فيه معًا،
+حيث يكون حبّنا أكبر من الحيطان،
+وأعمق من الليل،
+وأقوى من كل المسافات.
+
+أحبكِ الآن،
+وسأحبكِ حين تفتح يدكِ باب بيتنا،
+وحين نملأه بذكرياتنا،
+وحين نصحو لنجد أن الحلم صار حياةً حقيقية
+تُمسك بيدينا وتمضي معنا إلى`,
+        },
+
+        {
+          title: "We Don’t Move Houses — We Rearrange the Universe",
+          body: `In English we say I miss you 
+
+But in my Arabic poems to you I say: 
+
+حبيبتي،
+نحن لا ننتقل إلى بيتٍ جديد…
+نحن نُعيد ترتيب الكون.
+
+كنتُ وحدي،
+وكانت الجدران تعرف اسمي
+ولا تعرف صوتي.
+ثم جئتِ أنتِ،
+فصار للوقت نافذة،
+وصار للقلب عنوان.
+
+أنا العربي
+الذي تعلّم من الصحراء
+كيف ينتظر المطر،
+وأنتِ الأوكرانية
+التي تعلّمت من الثلج
+كيف تُخبّئ الدفء في راحتيها.
+
+حين نعيش معًا
+لن أضع قلبي في الخزانة،
+سأعلّقه على الحائط
+مثل لوحةٍ لا تخجل من عُريها.
+
+سنقتسم الصباح
+فنجان قهوةٍ
+وضمّة،
+وسنختلف أحيانًا
+لكننا سنصطلح
+على الوسادة نفسها.
+
+بيتنا لن يُبنى بالإسمنت،
+بل بالضحك حين نتعب،
+وبالصمت حين نفهم بعضنا
+دون كلام.
+
+تعالي…
+لنسكن بعضنا
+قبل أن نسكن المكان.
+تعالي…
+لأتعلم لغتك
+ليس بالكلمات
+بل بنبضك.
+
+أنا لا أقول “أحبك”
+لأن الكلمة ضيّقة،
+أنا أقول:
+أريد أن أستيقظ معك
+كل يوم
+وأشيخ بجانبك
+وأترك للعالم مهمة الغيرة.
+
+حبيبتي،
+حين نغلق باب بيتنا الأول
+سنفتح باب عمرٍ كامل،
+وسأعرف أخيرًا
+أن الوطن
+يمكن أن يكون امرأة.
+
+وسأزرع اسمكِ
+في مفاتيح البيت،
+وفي أوّل درج،
+وفي آخر الليل
+حين أنسى اسمي
+وأتذكّركِ.
+
+سنشيخ ببطء،
+لكن حبّنا
+سيبقى شابًا
+كأوّل نظرة،
+كأوّل خوفٍ
+من أن نفترق.
+
+إذا تعبتِ
+سأكون كتفكِ،
+وإذا ضعفتُ
+كوني صلاتي.
+
+وإذا سألونا
+عن معنى أن نعيش معًا،
+سنبتسم،
+ونغلق الباب،
+ونترك لهم الشرح
+خارج البيت.
+
+تعالي…
+فالبيوت الكثيرة
+لا تصنع وطنًا،
+والقلوب القليلة
+هي التي تفعل.
+
+تعالي…
+لنثبت للعالم
+أن الحب
+حين يكون صادقًا،
+لا يحتاج أكثر
+من قلبين
+قرّرا
+ألا يعودا وحيدين.`,
+        },
+      ];
+
+      // DOM
+      const pagesEl = document.getElementById("pages");
+      const tocEl = document.getElementById("toc");
+      const readingPill = document.getElementById("readingPill");
+      const sidebar = document.getElementById("sidebar");
+      const openMenuBtn = document.getElementById("openMenuBtn");
+
+      // Music
+      const audio = document.getElementById("bgMusic");
+      const musicBtn = document.getElementById("musicBtn");
+      const musicBtnMobile = document.getElementById("musicBtnMobile");
+      let musicOn = false;
+
+      function setMusicUI() {
+        const label = musicOn ? "♪ Music: On" : "♪ Music: Off";
+        musicBtn.textContent = label;
+        musicBtnMobile.textContent = label;
+      }
+
+      async function toggleMusic() {
+        try {
+          if (!musicOn) {
+            await audio.play();
+            musicOn = true;
+          } else {
+            audio.pause();
+            musicOn = false;
+          }
+          setMusicUI();
+        } catch (e) {
+          alert(
+            "Music couldn’t play. Add your file at: assets/music.mp3 (or update the src in the HTML)."
+          );
+        }
+      }
+
+      musicBtn.addEventListener("click", toggleMusic);
+      musicBtnMobile.addEventListener("click", toggleMusic);
+
+      // Build pages + TOC
+      function slugify(s) {
+        return String(s)
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      function render() {
+        pagesEl.innerHTML = "";
+        tocEl.innerHTML = "";
+
+        const pageIds = POEMS.map((p, idx) => `page-${idx + 1}-${slugify(p.title)}`);
+        const total = POEMS.length;
+
+        POEMS.forEach((poem, idx) => {
+          const id = pageIds[idx];
+
+          const section = document.createElement("section");
+          section.className = "page";
+          section.id = id;
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const inner = document.createElement("div");
+          inner.className = "card-inner";
+
+          if (poem.isDedication) {
+            inner.innerHTML = `
+              <h1 class="dedication-title">For Diana</h1>
+              <p class="dedication-sub">${escapeHtml(poem.body)}</p>
+              <span class="spark">Scroll for the poems ✦</span>
+            `;
+          } else {
+            inner.innerHTML = `
+              <h2 class="poem-title">${escapeHtml(poem.title)}</h2>
+              <p class="poem-body" dir="auto">${escapeHtml(poem.body)}</p>
+              <div class="poem-meta">
+                <span>Poem ${idx} of ${total - 1}</span>
+                <span>Made for Diana ✦</span>
+              </div>
+            `;
+          }
+
+          card.appendChild(inner);
+          section.appendChild(card);
+          pagesEl.appendChild(section);
+
+          const a = document.createElement("a");
+          a.href = `#${id}`;
+          const tocTitle = poem.isDedication ? "Dedication" : poem.title;
+          a.innerHTML = `
+            ${escapeHtml(tocTitle)}
+            <span class="small">${poem.isDedication ? "Start here" : "Tap to open"}</span>
+          `;
+          a.addEventListener("click", () => sidebar.classList.remove("open"));
+          tocEl.appendChild(a);
+        });
+
+        readingPill.textContent = `1 / ${total}`;
+      }
+
+      render();
+      setMusicUI();
+
+      // Active TOC highlight + reading pill
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const sections = Array.from(pagesEl.querySelectorAll(".page"));
+          const links = Array.from(tocEl.querySelectorAll("a"));
+
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+
+          const idx = sections.findIndex((s) => s.id === visible.target.id);
+          links.forEach((link, i) => link.classList.toggle("active", i === idx));
+          readingPill.textContent = `${idx + 1} / ${POEMS.length}`;
+        },
+        { root: pagesEl, threshold: [0.35, 0.55, 0.75] }
+      );
+
+      Array.from(pagesEl.querySelectorAll(".page")).forEach((s) => observer.observe(s));
+
+      // Mobile menu toggle
+      openMenuBtn.addEventListener("click", () => sidebar.classList.toggle("open"));
+
+      // Close sidebar if tap outside on mobile
+      document.addEventListener("click", (e) => {
+        const isMobile = window.matchMedia("(max-width: 860px)").matches;
+        if (!isMobile) return;
+
+        const clickedInsideSidebar = sidebar.contains(e.target);
+        const clickedMenuBtn = openMenuBtn.contains(e.target);
+
+        if (!clickedInsideSidebar && !clickedMenuBtn) sidebar.classList.remove("open");
+      });
+
+      // ---------- Particles (soft rose dust drift) ----------
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
+      let w, h, dpr;
+
+      function resize() {
+        dpr = Math.max(1, window.devicePixelRatio || 1);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      const particles = [];
+      const PARTICLE_COUNT = 60;
+
+      function rand(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function makeParticle() {
+        return {
+          x: rand(0, w),
+          y: rand(0, h),
+          r: rand(0.6, 2.2),
+          a: rand(0.04, 0.16),
+          vx: rand(-0.12, 0.12),
+          vy: rand(-0.08, 0.08),
+          tw: rand(0.002, 0.01),
+          t: rand(0, Math.PI * 2),
+        };
+      }
+
+      function initParticles() {
+        particles.length = 0;
+        for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(makeParticle());
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (const p of particles) {
+          p.t += p.tw;
+          const twinkle = (Math.sin(p.t) + 1) * 0.5;
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+
+          const alpha = p.a * (0.6 + twinkle * 0.8);
+
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(179, 58, 58, ${alpha * 0.6})`;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("resize", () => {
+        resize();
+        initParticles();
+      });
+
+      resize();
+      initParticles();
+      draw();
+    </script>
+  </body>
+</html></pre>
+        </body>
+    </html>
