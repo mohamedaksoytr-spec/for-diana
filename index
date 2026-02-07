@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohamed’s Beautiful Poetry — For Diana</title>
+    <meta name="description" content="Mohamed’s beautiful poetry to Diana." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-1: #120b08; /* deep espresso */
+        --bg-2: #1a0f0a; /* warm dark */
+        --card: rgba(20, 12, 9, 0.65);
+        --stroke: rgba(255, 210, 160, 0.18);
+        --text: rgba(255, 244, 235, 0.92);
+        --muted: rgba(255, 244, 235, 0.72);
+        --accent: #ff9f43; /* warm tangerine */
+        --accent-2: #ffd18c; /* soft honey */
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+        --radius: 22px;
+        --sidebar-w: 290px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: radial-gradient(
+            1200px 700px at 25% 15%,
+            rgba(255, 159, 67, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 600px at 70% 60%,
+            rgba(255, 209, 140, 0.12),
+            transparent 55%
+          ),
+          linear-gradient(120deg, var(--bg-1), var(--bg-2));
+        overflow: hidden; /* we'll scroll inside main */
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Soft animated romantic background glow */
+      .bg-ambient {
+        position: fixed;
+        inset: -40%;
+        background: radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 159, 67, 0.18),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 70% 60%,
+            rgba(255, 209, 140, 0.12),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 55% 20%,
+            rgba(255, 120, 120, 0.07),
+            transparent 45%
+          );
+        filter: blur(34px);
+        opacity: 0.9;
+        animation: drift 12s ease-in-out infinite alternate;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate3d(-2%, -1%, 0) scale(1);
+        }
+        100% {
+          transform: translate3d(2%, 1%, 0) scale(1.03);
+        }
+      }
+
+      /* Particles canvas */
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.7;
+      }
+
+      /* Layout */
+      .app {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: var(--sidebar-w) 1fr;
+        height: 100vh;
+      }
+
+      /* Sidebar */
+      aside {
+        border-right: 1px solid rgba(255, 210, 160, 0.12);
+        background: linear-gradient(
+          180deg,
+          rgba(15, 9, 7, 0.78),
+          rgba(10, 6, 5, 0.55)
+        );
+        backdrop-filter: blur(10px);
+        padding: 18px 14px;
+        overflow: hidden;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 12px 10px;
+        border: 1px solid rgba(255, 210, 160, 0.12);
+        border-radius: 18px;
+        background: rgba(10, 6, 5, 0.35);
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+      }
+
+      .brand .script {
+        font-family: "Sacramento", cursive;
+        font-size: 32px;
+        line-height: 1;
+        color: rgba(255, 226, 200, 0.96);
+      }
+
+      .brand .sub {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        padding: 10px 12px 2px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        appearance: none;
+        border: 1px solid rgba(255, 210, 160, 0.16);
+        background: rgba(255, 159, 67, 0.12);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: transform 0.15s ease, background 0.15s ease,
+          border-color 0.15s ease;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 159, 67, 0.18);
+        border-color: rgba(255, 209, 140, 0.28);
+      }
+
+      .pill {
+        font-size: 12px;
+        color: rgba(255, 244, 235, 0.78);
+        border: 1px solid rgba(255, 210, 160, 0.14);
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(10, 6, 5, 0.25);
+      }
+
+      .toc {
+        margin-top: 12px;
+        height: calc(100vh - 180px);
+        overflow: auto;
+        padding-right: 6px;
+      }
+
+      .toc::-webkit-scrollbar {
+        width: 8px;
+      }
+      .toc::-webkit-scrollbar-thumb {
+        background: rgba(255, 159, 67, 0.18);
+        border-radius: 999px;
+      }
+
+      .toc a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 14px;
+        text-decoration: none;
+        color: rgba(255, 244, 235, 0.86);
+        border: 1px solid transparent;
+        transition: background 0.15s ease, border-color 0.15s ease;
+        margin: 8px 0;
+        background: rgba(10, 6, 5, 0.18);
+      }
+
+      .toc a:hover {
+        background: rgba(255, 159, 67, 0.12);
+        border-color: rgba(255, 210, 160, 0.14);
+      }
+
+      .toc a.active {
+        background: rgba(255, 159, 67, 0.18);
+        border-color: rgba(255, 209, 140, 0.26);
+      }
+
+      .toc .small {
+        display: block;
+        font-size: 12px;
+        color: rgba(255, 244, 235, 0.62);
+        margin-top: 3px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      /* Main scroll area */
+      main {
+        height: 100vh;
+        overflow: auto;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        padding: 18px 18px 34px;
+      }
+
+      /* Hide main scrollbar nicely */
+      main::-webkit-scrollbar {
+        width: 10px;
+      }
+      main::-webkit-scrollbar-thumb {
+        background: rgba(255, 159, 67, 0.16);
+        border-radius: 999px;
+      }
+
+      .page {
+        min-height: calc(100vh - 36px);
+        scroll-snap-align: start;
+        display: grid;
+        place-items: center;
+        padding: 20px 10px;
+      }
+
+      .card {
+        width: min(860px, 100%);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(10, 6, 5, 0.55),
+          rgba(10, 6, 5, 0.38)
+        );
+        border: 1px solid rgba(255, 210, 160, 0.14);
+        box-shadow: var(--shadow);
+        padding: 26px 22px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(
+            circle at 25% 25%,
+            rgba(255, 159, 67, 0.16),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 75% 70%,
+            rgba(255, 209, 140, 0.1),
+            transparent 45%
+          );
+        filter: blur(26px);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+
+      .card-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .dedication-title {
+        font-family: "Sacramento", cursive;
+        font-size: clamp(44px, 6vw, 66px);
+        line-height: 1;
+        margin: 0;
+        color: rgba(255, 236, 220, 0.98);
+      }
+
+      .dedication-sub {
+        margin: 10px 0 0;
+        color: rgba(255, 244, 235, 0.8);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .spark {
+        display: inline-block;
+        margin: 14px 0 0;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 210, 160, 0.14);
+        background: rgba(255, 159, 67, 0.12);
+        color: rgba(255, 244, 235, 0.9);
+        font-size: 13px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      .poem-title {
+        margin: 0 0 14px;
+        font-size: 24px;
+        font-weight: 600;
+        color: rgba(255, 236, 220, 0.96);
+        letter-spacing: 0.2px;
+      }
+
+      .poem-body {
+        margin: 0;
+        white-space: pre-wrap;
+        line-height: 1.85;
+        font-size: 17px;
+        color: rgba(255, 244, 235, 0.9);
+      }
+
+      .poem-meta {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        color: rgba(255, 244, 235, 0.62);
+        font-size: 12.5px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      footer {
+        position: fixed;
+        left: calc(var(--sidebar-w) + 16px);
+        right: 16px;
+        bottom: 12px;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(10, 6, 5, 0.35);
+        border: 1px solid rgba(255, 210, 160, 0.12);
+        backdrop-filter: blur(10px);
+        color: rgba(255, 244, 235, 0.75);
+        font-size: 12.5px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      .footer-accent {
+        color: rgba(255, 209, 140, 0.92);
+      }
+
+      /* Mobile */
+      .mobile-topbar {
+        display: none;
+      }
+
+      @media (max-width: 860px) {
+        body {
+          overflow: hidden;
+        }
+        .app {
+          grid-template-columns: 1fr;
+        }
+        aside {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: min(92vw, 360px);
+          transform: translateX(-105%);
+          transition: transform 0.2s ease;
+          z-index: 5;
+        }
+        aside.open {
+          transform: translateX(0%);
+        }
+        .mobile-topbar {
+          display: flex;
+          position: fixed;
+          top: 12px;
+          left: 12px;
+          right: 12px;
+          z-index: 6;
+          gap: 10px;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px 12px;
+          border-radius: 16px;
+          background: rgba(10, 6, 5, 0.45);
+          border: 1px solid rgba(255, 210, 160, 0.12);
+          backdrop-filter: blur(10px);
+        }
+        main {
+          padding-top: 68px;
+        }
+        footer {
+          left: 12px;
+          right: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg-ambient"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Mobile top bar -->
+    <div class="mobile-topbar">
+      <button class="btn" id="openMenuBtn">☰ Poems</button>
+      <button class="btn" id="musicBtnMobile">♪ Music: Off</button>
+    </div>
+
+    <div class="app">
+      <aside id="sidebar">
+        <div class="brand">
+          <div class="script">For Diana</div>
+          <div class="sub">Mohamed’s beautiful poetry — cozy, intimate, and cute.</div>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="musicBtn">♪ Music: Off</button>
+          <span class="pill" id="readingPill">0 / 0</span>
+        </div>
+
+        <nav class="toc" id="toc"></nav>
+      </aside>
+
+      <main id="pages"></main>
+    </div>
+
+    <footer>
+      <div>
+        Made with a warm heart — <span class="footer-accent">Mohamed</span>
+      </div>
+      <div id="hint">Tip: scroll like pages ✦</div>
+    </footer>
+
+    <!-- Audio (put your file in the repo at: assets/music.mp3) -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="assets/music.mp3" type="audio/mpeg" />
+      <!-- If you use a different format/file, update the src above. -->
+    </audio>
+
+    <script>
+      /**
+       * ✅ HOW TO ADD YOUR POEMS
+       * - Replace the sample poems below with yours.
+       * - Keep the structure: { title: "…", body: "…" }
+       * - You can add 10–15+ poems easily.
+       */
+      const POEMS = [
+        {
+          title: "Dedication (edit me)",
+          body:
+            "My Diana,\n\nThis little corner of the world is for you.\nA cozy place where every word is a warm blanket,\nwhere every line is me choosing you again.\n\n— Mohamed",
+          isDedication: true,
+        },
+        {
+          title: "Poem One (replace title)",
+          body:
+            "Write your poem here...\n\nTip: You can use line breaks freely.\nThis will display exactly how you format it.\n\n(Replace everything in this sample.)",
+        },
+        {
+          title: "Poem Two (replace title)",
+          body:
+            "Another poem goes here...\n\nAdd as many poems as you want in the POEMS array.",
+        },
+      ];
+
+      // DOM
+      const pagesEl = document.getElementById("pages");
+      const tocEl = document.getElementById("toc");
+      const readingPill = document.getElementById("readingPill");
+      const sidebar = document.getElementById("sidebar");
+      const openMenuBtn = document.getElementById("openMenuBtn");
+
+      // Music
+      const audio = document.getElementById("bgMusic");
+      const musicBtn = document.getElementById("musicBtn");
+      const musicBtnMobile = document.getElementById("musicBtnMobile");
+      let musicOn = false;
+
+      function setMusicUI() {
+        const label = musicOn ? "♪ Music: On" : "♪ Music: Off";
+        musicBtn.textContent = label;
+        musicBtnMobile.textContent = label;
+      }
+
+      async function toggleMusic() {
+        try {
+          if (!musicOn) {
+            await audio.play();
+            musicOn = true;
+          } else {
+            audio.pause();
+            musicOn = false;
+          }
+          setMusicUI();
+        } catch (e) {
+          // Autoplay policies: user must click (we are clicking), but file might be missing
+          alert(
+            "Music couldn’t play. Make sure you added your file at: assets/music.mp3 (or update the src in the HTML)."
+          );
+        }
+      }
+
+      musicBtn.addEventListener("click", toggleMusic);
+      musicBtnMobile.addEventListener("click", toggleMusic);
+
+      // Build pages + TOC
+      function slugify(s) {
+        return s
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+      }
+
+      const pageIds = POEMS.map((p, idx) => `page-${idx + 1}-${slugify(p.title)}`);
+
+      function render() {
+        pagesEl.innerHTML = "";
+        tocEl.innerHTML = "";
+
+        const totalPoems = POEMS.length;
+
+        POEMS.forEach((poem, idx) => {
+          const id = pageIds[idx];
+
+          // Page section
+          const section = document.createElement("section");
+          section.className = "page";
+          section.id = id;
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const inner = document.createElement("div");
+          inner.className = "card-inner";
+
+          if (poem.isDedication) {
+            inner.innerHTML = `
+              <h1 class="dedication-title">${escapeHtml(poem.title.replace("Dedication", "For Diana"))}</h1>
+              <p class="dedication-sub">${escapeHtml(poem.body)}</p>
+              <span class="spark">Scroll for the poems ✦</span>
+            `;
+          } else {
+            inner.innerHTML = `
+              <h2 class="poem-title">${escapeHtml(poem.title)}</h2>
+              <p class="poem-body">${escapeHtml(poem.body)}</p>
+              <div class="poem-meta">
+                <span>Poem ${idx} of ${totalPoems - 1}</span>
+                <span>Made for Diana ✦</span>
+              </div>
+            `;
+          }
+
+          card.appendChild(inner);
+          section.appendChild(card);
+          pagesEl.appendChild(section);
+
+          // TOC entry
+          const a = document.createElement("a");
+          a.href = `#${id}`;
+          const tocTitle = poem.isDedication ? "Dedication" : poem.title;
+          a.innerHTML = `
+            ${escapeHtml(tocTitle)}
+            <span class="small">${poem.isDedication ? "Start here" : "Tap to open"}</span>
+          `;
+          a.addEventListener("click", () => {
+            // mobile: close menu after navigation
+            sidebar.classList.remove("open");
+          });
+          tocEl.appendChild(a);
+        });
+
+        readingPill.textContent = `1 / ${totalPoems}`;
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      render();
+      setMusicUI();
+
+      // Active TOC highlighting + reading pill updates
+      const tocLinks = () => Array.from(tocEl.querySelectorAll("a"));
+      const sections = () => Array.from(pagesEl.querySelectorAll(".page"));
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          // find the most visible
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+
+          const id = visible.target.id;
+          const idx = sections().findIndex((s) => s.id === id);
+
+          tocLinks().forEach((link, i) => link.classList.toggle("active", i === idx));
+          readingPill.textContent = `${idx + 1} / ${POEMS.length}`;
+        },
+        { root: pagesEl, threshold: [0.35, 0.55, 0.75] }
+      );
+
+      sections().forEach((s) => observer.observe(s));
+
+      // Mobile menu toggle
+      openMenuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+      });
+
+      // Close sidebar if user taps outside on mobile
+      document.addEventListener("click", (e) => {
+        const isMobile = window.matchMedia("(max-width: 860px)").matches;
+        if (!isMobile) return;
+
+        const clickedInsideSidebar = sidebar.contains(e.target);
+        const clickedMenuBtn = openMenuBtn.contains(e.target);
+
+        if (!clickedInsideSidebar && !clickedMenuBtn) sidebar.classList.remove("open");
+      });
+
+      // ---------- Particles (soft ember-like drift) ----------
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
+      let w, h, dpr;
+
+      function resize() {
+        dpr = Math.max(1, window.devicePixelRatio || 1);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      const particles = [];
+      const PARTICLE_COUNT = 60;
+
+      function rand(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function makeParticle() {
+        return {
+          x: rand(0, w),
+          y: rand(0, h),
+          r: rand(0.6, 2.2),
+          a: rand(0.05, 0.18),
+          vx: rand(-0.12, 0.12),
+          vy: rand(-0.08, 0.08),
+          tw: rand(0.002, 0.01), // twinkle speed
+          t: rand(0, Math.PI * 2),
+        };
+      }
+
+      function initParticles() {
+        particles.length = 0;
+        for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(makeParticle());
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (const p of particles) {
+          p.t += p.tw;
+          const twinkle = (Math.sin(p.t) + 1) * 0.5; // 0..1
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // wrap
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+
+          const alpha = p.a * (0.6 + twinkle * 0.8);
+
+          // soft glow (no harsh colors — uses current fillStyle, slight warm tint via rgba)
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255, 180, 110, ${alpha})`;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("resize", () => {
+        resize();
+        initParticles();
+      });
+
+      resize();
+      initParticles();
+      draw();
+    </script>
+  </body>
+</html>
